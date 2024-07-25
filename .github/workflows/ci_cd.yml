@@ -14,17 +14,17 @@ jobs:
     - uses: actions/checkout@v4
     - name: Installing dependencies...
       run: |
-        apt-get update -y
-        apt-get upgrade -y
-        apt install git -y
-        apt install gcc -y
-        apt install cpio -y
-        apt install file -y
-        apt install size -y
-        apt install bzip2 -y
-        apt install cppcheck -y
-        apt install doxygen -y
-        apt install python3 -y
+        sudo apt update -y
+        sudo apt upgrade -y
+        sudo apt install git -y
+        sudo apt install gcc -y
+        sudo apt install cpio -y
+        sudo apt install file -y
+        sudo apt install size -y
+        sudo apt install bzip2 -y
+        sudo apt install cppcheck -y
+        sudo apt install doxygen -y
+        sudo apt install python3 -y
 
   build:
     runs-on: ubuntu-latest
@@ -35,7 +35,7 @@ jobs:
     - name: Building
       run: |
         cd ./scripts
-        chmod +x ./*.py
+        sudo chmod +x ./*.py
         python3 ./build.py build
 
   lint:
@@ -47,5 +47,5 @@ jobs:
     - name: Linting
       run: |
         cd ./scripts
-        chmod +x ./*.py
+        sudo chmod +x ./*.py
         python3 ./build.py lint
