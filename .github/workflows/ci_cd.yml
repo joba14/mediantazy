@@ -7,8 +7,28 @@ on:
     branches: [ "main", "develop" ]
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Installing dependencies...
+      run: |
+        apt-get update -y
+        apt-get upgrade -y
+        apt install git -y
+        apt install gcc -y
+        apt install cpio -y
+        apt install file -y
+        apt install size -y
+        apt install bzip2 -y
+        apt install cppcheck -y
+        apt install doxygen -y
+        apt install python3 -y
+
   build:
     runs-on: ubuntu-latest
+    needs: setup
 
     steps:
     - uses: actions/checkout@v4
@@ -20,6 +40,7 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    needs: setup
 
     steps:
     - uses: actions/checkout@v4
