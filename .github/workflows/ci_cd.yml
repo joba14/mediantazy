@@ -44,4 +44,5 @@ jobs:
       run: |
         cd ./scripts
         sudo chmod +x ./*.py
+        cppcheck -h
         python3 ./build.py lint
