@@ -1,0 +1,21 @@
+
+{
+	"file-banner": {
+		"prefix": "file-banner",
+		"description": "file banner snippet",
+		"body": [
+			"",
+			"/**",
+			" * @file $TM_FILENAME",
+			" * ",
+			" * @copyright This file's a part of the \"mediantazy\" project and is distributed",
+			" * and licensed under \"mediantazy gplv1\" license.",
+			" * ",
+			" * @author $author_name",
+			" * ",
+			" * @date $CURRENT_YEAR-$CURRENT_MONTH-$CURRENT_DATE",
+			" */",
+			""
+		]
+	}
+}

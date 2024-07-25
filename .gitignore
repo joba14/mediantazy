@@ -1,3 +1,4 @@
+
 # Prerequisites
 *.d
 
@@ -30,11 +31,14 @@
 
 # Executables
 *.exe
+*.bin
 *.out
 *.app
 *.i*86
 *.x86_64
 *.hex
+*.ihex
+*.srec
 
 # Debug files
 *.dSYM/
@@ -50,3 +54,23 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Local History for Visual Studio Code
+.history/
+
+# Built Visual Studio Code Extensions
+*.vsix
+
+# Custom, project-related ignores
+build
+build.bin
+build.bin.old
+docs
+
+# Visual Studio Code Counter
+.VSCodeCounter
+
+# Visual Studio Code local configs
+.vscode/*
+!.vscode/*.code-snippets
+!.vscode/settings.json
