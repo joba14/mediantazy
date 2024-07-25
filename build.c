@@ -158,11 +158,6 @@ build_target(docs, "generate the docs for the project.")
 	return status;
 }
 
-
-
-
-
-
 build_target(run_dev_server, "run the mediantazy server in the develop configuration.")
 {
 	return run(build_conf_dev_server);
@@ -197,11 +192,6 @@ build_target(run_all, "run the mediantazy server and client in the develop and r
 {
 	return run_dev_all() && run_rel_all();
 }
-
-
-
-
-
 
 build_targets(
 	bind_target(clean           ),
