@@ -1,0 +1,32 @@
+name: Mediantazy CI/CD
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Building
+      run: |
+        cd ./scripts
+        chmod +x ./*.py
+        chmod +x ./*.sh
+        python3 ./build.py build
+
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Linting
+      run: |
+        cd ./scripts
+        chmod +x ./*.py
+        chmod +x ./*.sh
+        python3 ./build.py lint
