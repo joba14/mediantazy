@@ -18,10 +18,6 @@ jobs:
         sudo apt upgrade -y
         sudo apt install git -y
         sudo apt install gcc -y
-        sudo apt install cpio -y
-        sudo apt install file -y
-        sudo apt install size -y
-        sudo apt install bzip2 -y
         sudo apt install cppcheck -y
         sudo apt install doxygen -y
         sudo apt install python3 -y
