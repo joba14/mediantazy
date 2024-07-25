@@ -10,13 +10,18 @@
  * @date 2024-07-25
  */
 
-#include "common/hi.h"
+#include "common/logger.h"
+
+#include "server/main.h"
+#include "server/config.h"
 
 #include <stdio.h>
 
-int main(void)
+int32_t main(int32_t argc, const char_t** argv)
 {
+	server_config_s config = server_config_from_cli(&argc, &argv);
+	common_logger_info("config=[address=%s, port=%u, backlog=%u]", config.address, config.port, config.backlog);
+
 	(void)printf("hello, from server!\n");
-	hi();
 	return 0;
 }

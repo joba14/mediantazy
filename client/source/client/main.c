@@ -10,13 +10,18 @@
  * @date 2024-07-25
  */
 
-#include "common/hi.h"
+#include "common/logger.h"
+
+#include "client/config.h"
+#include "client/main.h"
 
 #include <stdio.h>
 
-int main(void)
+int32_t main(int32_t argc, const char_t** argv)
 {
+	client_config_s config = client_config_from_cli(&argc, &argv);
+	common_logger_info("config=[address=%s, port=%u]", config.address, config.port);
+
 	(void)printf("hello, from client!\n");
-	hi();
 	return 0;
 }

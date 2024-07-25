@@ -108,25 +108,6 @@ def docs(project_dir: str) -> bool:
 	return True
 
 
-def run(run_type: str, project_dir: str) -> bool:
-	global types
-	if run_type not in types:
-		print(f'error: run configuration must be one of the {types}')
-		return False
-
-	if not bootstrap_build_system(project_dir):
-		return False
-
-	print(f'info : running the project for {run_type}.')
-	result: subprocess.CompletedProcess[bytes] = subprocess.run(
-		[os.path.join(project_dir, build_bin_name), f'run_{run_type}'], cwd=project_dir
-	)
-	if result.returncode != 0:
-		return False
-
-	return True
-
-
 def main() -> None:
 	global types
 	global types
@@ -139,8 +120,6 @@ def main() -> None:
 	lint_parser:  argparse.ArgumentParser = subparsers.add_parser(f'lint', help=f'The lint command')
 	lint_parser.add_argument(f'--type', choices=types, type=str, default='all', help=f'Lint type')
 	docs_parser:  argparse.ArgumentParser = subparsers.add_parser(f'docs', help=f'The docs command')
-	run_parser:  argparse.ArgumentParser = subparsers.add_parser(f'run', help=f'The run command')
-	run_parser.add_argument(f'--type', choices=types, type=str, default='all', help=f'Run type')
 	args: argparse.Namespace = parser.parse_args()
 
 	script_path: str = os.getcwd()
@@ -158,9 +137,6 @@ def main() -> None:
 			sys.exit(1)
 	elif args.command == f'docs':
 		if not docs(project_dir):
-			sys.exit(1)
-	elif args.command == f'run':
-		if not run(args.type, project_dir):
 			sys.exit(1)
 	else:
 		print(f'error: invalid command \'{args.command}\'')

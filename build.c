@@ -30,16 +30,19 @@ static const char_t* const _g_common_defines[] =
 
 static const char_t* const _g_common_sources[] =
 {
-	"./common/source/common/hi.c",
+	"./common/source/common/debug.c",
+	"./common/source/common/logger.c",
 };
 
 static const char_t* const _g_server_sources[] =
 {
+	"./server/source/server/config.c",
 	"./server/source/server/main.c",
 };
 
 static const char_t* const _g_client_sources[] =
 {
+	"./client/source/client/config.c",
 	"./client/source/client/main.c",
 };
 
@@ -67,8 +70,6 @@ static void make_compiler_command(build_command_s* const command, const build_co
 static bool_t build(const build_conf_e conf);
 static void make_linter_command(build_command_s* const command, const build_conf_e conf);
 static bool_t lint(const build_conf_e conf);
-static void make_run_command(build_command_s* const command, const build_conf_e conf);
-static bool_t run(const build_conf_e conf);
 
 build_target(clean, "clean the project and remove the build directory with all its artefacts.")
 {
@@ -158,41 +159,6 @@ build_target(docs, "generate the docs for the project.")
 	return status;
 }
 
-build_target(run_dev_server, "run the mediantazy server in the develop configuration.")
-{
-	return run(build_conf_dev_server);
-}
-
-build_target(run_rel_server, "run the mediantazy server in the release configuration.")
-{
-	return run(build_conf_rel_server);
-}
-
-build_target(run_dev_client, "run the mediantazy client in the develop configuration.")
-{
-	return run(build_conf_dev_client);
-}
-
-build_target(run_rel_client, "run the mediantazy client in the release configuration.")
-{
-	return run(build_conf_rel_client);
-}
-
-build_target(run_dev_all, "run the mediantazy server and client in the develop configuration.")
-{
-	return run_dev_server() && run_dev_client();
-}
-
-build_target(run_rel_all, "run the mediantazy server and client in the release configuration.")
-{
-	return run_rel_server() && run_rel_client();
-}
-
-build_target(run_all, "run the mediantazy server and client in the develop and release configurations.")
-{
-	return run_dev_all() && run_rel_all();
-}
-
 build_targets(
 	bind_target(clean           ),
 	bind_target(build_dev_server),
@@ -210,13 +176,6 @@ build_targets(
 	bind_target(lint_rel_all    ),
 	bind_target(lint_all        ),
 	bind_target(docs            ),
-	bind_target(run_dev_server ),
-	bind_target(run_rel_server ),
-	bind_target(run_dev_client ),
-	bind_target(run_rel_client ),
-	bind_target(run_dev_all    ),
-	bind_target(run_rel_all    ),
-	bind_target(run_all        ),
 );
 
 static void make_compiler_command(build_command_s* const command, const build_conf_e conf)
@@ -375,27 +334,6 @@ static bool_t lint(const build_conf_e conf)
 {
 	build_command_s command = {0};
 	make_linter_command(&command, conf);
-	const bool_t status = build_proc_run_sync(&command);
-	build_vector_drop(&command);
-	return status;
-}
-
-static void make_run_command(build_command_s* const command, const build_conf_e conf)
-{
-	switch (conf)
-	{
-		case build_conf_dev_server: { build_command_append(command, "./build/mediantazy_dev_server"); } break;
-		case build_conf_rel_server: { build_command_append(command, "./build/mediantazy_rel_server"); } break;
-		case build_conf_dev_client: { build_command_append(command, "./build/mediantazy_dev_client"); } break;
-		case build_conf_rel_client: { build_command_append(command, "./build/mediantazy_rel_client"); } break;
-		default:                    { assert(0);                                                      } break;
-	}
-}
-
-static bool_t run(const build_conf_e conf)
-{
-	build_command_s command = {0};
-	make_run_command(&command, conf);
 	const bool_t status = build_proc_run_sync(&command);
 	build_vector_drop(&command);
 	return status;

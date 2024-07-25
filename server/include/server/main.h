@@ -1,6 +1,6 @@
 
 /**
- * @file hi.c
+ * @file main.h
  * 
  * @copyright This file's a part of the "mediantazy" project and is distributed
  * and licensed under "mediantazy gplv1" license.
@@ -10,11 +10,11 @@
  * @date 2024-07-25
  */
 
-#include "common/hi.h"
+#ifndef __server__include__server__main_h__
+#define __server__include__server__main_h__
 
-#include <stdio.h>
+#include "common/types.h"
 
-void hi(void)
-{
-	(void)printf("hi!\n");
-}
+int32_t main(int32_t argc, const char_t** argv);
+
+#endif
