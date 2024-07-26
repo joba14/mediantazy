@@ -8,8 +8,3 @@ RUN apt install gcc -y
 RUN apt install cppcheck -y
 RUN apt install doxygen -y
 RUN apt install python3 -y
-
-WORKDIR /workspace
-COPY . .
-
-RUN chmod +x ./scripts/*.py

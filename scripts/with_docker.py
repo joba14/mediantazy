@@ -23,13 +23,13 @@ def main() -> None:
 
 	image_name: str = f'mediantazy_dev_container_image:0.1'
 	if not image_exists(image_name):
-		result = subprocess.CompletedProcess[bytes] = subprocess.run(
+		result: subprocess.CompletedProcess[bytes] = subprocess.run(
 			[f'docker', f'build', f'-f', f'./.dockerfile', f'-t', image_name, f'.'])
 		if result.returncode != 0:
 			exit(result.returncode)
 
 	command: str = f'cd ./scripts && python3 ./build.py ' + f' '.join(args.cmd_args)
-	result = subprocess.CompletedProcess[bytes] = subprocess.run(
+	result: subprocess.CompletedProcess[bytes] = subprocess.run(
 		[f'docker', f'run', f'--rm', f'--name', f'mediantazy_dev_container', f'-v', f'{project_dir}:/workspace', f'-w', f'/workspace', f'mediantazy_dev_container_image:0.1', f'/bin/bash', f'-c', command])
 	exit(result.returncode)
 
