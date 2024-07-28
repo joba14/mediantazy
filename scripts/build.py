@@ -59,7 +59,7 @@ def clean(project_dir: str) -> bool:
 def build(build_type: str, project_dir: str) -> bool:
 	global types
 	if build_type not in types:
-		print(f'error: build configuration must be one of the {types}')
+		print(f'error: build type must be one of the {types}')
 		return False
 
 	if not bootstrap_build_system(project_dir):
@@ -78,7 +78,7 @@ def build(build_type: str, project_dir: str) -> bool:
 def lint(lint_type: str, project_dir: str) -> bool:
 	global types
 	if lint_type not in types:
-		print(f'error: lint configuration must be one of the {types}')
+		print(f'error: lint type must be one of the {types}')
 		return False
 
 	if not bootstrap_build_system(project_dir):
